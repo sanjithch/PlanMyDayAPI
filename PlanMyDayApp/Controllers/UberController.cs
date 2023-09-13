@@ -31,13 +31,14 @@ namespace PlanMyDayApp.Controllers
             return "value";
         }
 
+        //To get Addresses from Uber application
         [HttpGet]
         [Route("getAddresses/{id}")]
         public async Task<IEnumerable<string>> GetAddresses(string id)
         {
             //HttpClient httpClient = new HttpClient();
 
-            Console.Write("Entered get address");
+            Console.Write("Searching for address - " + id);
             String[] arr = new string[2];
 
             using (HttpClient httpClient = new HttpClient())
@@ -83,7 +84,7 @@ namespace PlanMyDayApp.Controllers
 
                     for(int i=0;i<address.data.candidates.Count;i++)
                     {
-                        arr[i] = address.data.candidates[i].addressLine1;
+                        arr[i] = address.data.candidates[i].addressLine1+ address.data.candidates[i].addressLine2;
                         Console.WriteLine(arr[i]);
                     }
                 }
@@ -94,6 +95,17 @@ namespace PlanMyDayApp.Controllers
             }
 
             return arr;
+        }
+
+
+
+        // To get the price between two locations
+        [HttpGet]
+        [Route("getRides/{from}&{to}")]
+        public async Task<IEnumerable<string>> GetRides(string from, string to)
+        {
+
+            return null;
         }
     }
 }

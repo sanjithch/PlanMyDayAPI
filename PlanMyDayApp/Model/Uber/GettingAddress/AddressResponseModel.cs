@@ -1,5 +1,6 @@
 ﻿namespace PlanMyDayApp.Model.Uber.GettingAddress
 {
+    // this is only for single address request
     public class AddressResponseModel
     {
         public string? Status { get; set; }
