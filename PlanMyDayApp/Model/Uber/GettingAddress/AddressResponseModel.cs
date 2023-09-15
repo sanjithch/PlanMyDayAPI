@@ -20,4 +20,25 @@
         public string? addressLine2 { get; set; }
         public string? provider { get; set; }
     }
+
+    public class ResponseWithIDandAddress
+    {
+        public string? id { get; set;}
+        public string? address{ get; set; }
+
+        public ResponseWithIDandAddress(string? id, string? address)
+        {
+            this.id = id;
+            this.address = address;
+        }
+    }
+
+
+    // for Address co-ordinates response
+    public class ResponseForCooridnatesForAddress
+    {
+        public string? status { get; set; }
+        public Location? location { get; set; }
+    }
+
 }
