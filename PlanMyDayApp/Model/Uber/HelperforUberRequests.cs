@@ -36,34 +36,56 @@ namespace PlanMyDayApp.Model.Uber
             return result;
         }
 
-        //mapping selected address into the session object
-        public void MappingSelectedAddress(UberSession session, string type, string address)
+        //give body for getting fares for Lyft
+        public string GiveBodyForGettingFaresFromLyft(JourneyCoOrdinates journeyCoOrdinates)
         {
-            if (type == "to")
-            {
-                foreach (var a in session.addressResponseModelforTo.data.candidates)
-                {
-                    if (a.addressLine1 + a.addressLine2 == address)
-                    {
-                        session.journeyModel.From.addressLine1 = a.addressLine1;
-                        session.journeyModel.From.addressLine2 = a.addressLine2;
-                        session.journeyModel.From.id = a.id;
-                    }
-                }
-            }
-            else
-            {
-                foreach (var a in session.addressResponseModelforFrom.data.candidates)
-                {
-                    if (a.addressLine1 + a.addressLine2 == address)
-                    {
-                        session.journeyModel.To.addressLine1 = a.addressLine1;
-                        session.journeyModel.To.addressLine2 = a.addressLine2;
-                        session.journeyModel.To.id = a.id;
-                    }
-                }
-            }
-        }  
+            Console.WriteLine(JsonConvert.SerializeObject(journeyCoOrdinates));
+            Console.WriteLine(".....Entered Details......");
+            LyftJounery lyftJounery = new LyftJounery();
+            lyftJounery.origin = new LyftCoOrdinates();
+            lyftJounery.destination = new LyftCoOrdinates();
+            lyftJounery.origin.latitude_e6 = (int)(journeyCoOrdinates.pickup.latitude * 1000000);
+            lyftJounery.origin.longitude_e6 = (int)(journeyCoOrdinates.pickup.longitude * 1000000);
+            lyftJounery.destination.latitude_e6 = (int)(journeyCoOrdinates.destinations[0].latitude * 1000000);
+            lyftJounery.destination.longitude_e6 = (int)(journeyCoOrdinates.destinations[0].longitude * 1000000);
+            //"{\"origin\":{\"latitude_e6\":38877548,\"longitude_e6\":-94609733},\"destination\":{\"latitude_e6\":39295503,\"longitude_e6\":-94720197
+            string result = JsonConvert.SerializeObject(lyftJounery);
+            result = result.Substring(0, result.Length - 1);
+            Console.WriteLine(result);
+            string body = result + ",\"template_rendering_specification\":{\"supported_cell_types\":{\"supports_selectable_offer_cell\":true,\"supports_accordion_offer_cell\":true},\"supported_content_block_text_styles\":[6,7,8,9,10,11,12,13],\"supported_decision_tree_domains\":{\"supports_offer_selector\":true}},\"request_source\":1,\"waypoints\":[]}";
+            Console.WriteLine("....body...");
+            Console.WriteLine(body);
+            return body;
+        }
+
+        //mapping selected address into the session object
+        //public void MappingSelectedAddress(UberSession session, string type, string address)
+        //{
+        //    if (type == "to")
+        //    {
+        //        foreach (var a in session.addressResponseModelforTo.data.candidates)
+        //        {
+        //            if (a.addressLine1 + a.addressLine2 == address)
+        //            {
+        //                session.journeyModel.From.addressLine1 = a.addressLine1;
+        //                session.journeyModel.From.addressLine2 = a.addressLine2;
+        //                session.journeyModel.From.id = a.id;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        foreach (var a in session.addressResponseModelforFrom.data.candidates)
+        //        {
+        //            if (a.addressLine1 + a.addressLine2 == address)
+        //            {
+        //                session.journeyModel.To.addressLine1 = a.addressLine1;
+        //                session.journeyModel.To.addressLine2 = a.addressLine2;
+        //                session.journeyModel.To.id = a.id;
+        //            }
+        //        }
+        //    }
+        //}  
 
         //for future reference
         public HttpClient GetHttpClient() {

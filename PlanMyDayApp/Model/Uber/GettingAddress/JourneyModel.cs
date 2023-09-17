@@ -33,4 +33,18 @@
         public double latitude { get; set; }
         public double longitude { get; set; }
     }
+
+    // Lyft Journey Helpers
+    public class LyftJounery
+    {
+        public LyftCoOrdinates? origin { get; set; }
+        public LyftCoOrdinates? destination { get; set; }
+    }
+
+    public class LyftCoOrdinates
+    {
+        public int latitude_e6 { get; set; }
+        public int longitude_e6 { get;set; }
+    }
 }
+
