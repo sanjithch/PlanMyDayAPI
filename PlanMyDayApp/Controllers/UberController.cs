@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using PlanMyDayApp.Model.Uber;
 using PlanMyDayApp.Model.Uber.GettingAddress;
+using System.Net;
 using System.Net.Http.Headers;
 using System.Numerics;
 using System.Text;
@@ -182,8 +183,8 @@ namespace PlanMyDayApp.Controllers
                 httpClient.DefaultRequestHeaders.Add("x-uber-wa-info", " IHJFRSRRQRIKQTJGKHPNSRHI");
 
                 //authentication key
-                httpClient.DefaultRequestHeaders.Add("Cookie", " marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; UBER_CONSENTMGR=1694543244351|consent:true; udi-id=EwxgbpsNPuhj/0Ms+R6RGBRjcq1RErUD321Q2mvjwmISQWHKJ3HyGzCx4YcZ0WXQmzUFw0i6L3hXvCn4DwFboWD9A7UWabcj6OaowvP80+lRgy5zp9vBOucrstgoUeqaUxu9GLOnNfTEXwYUrlv6nYXr77XTO4D7GsRhGaZh+/nW9IdYeruUKb+DQOmsHA5CRF/zBxsGRC7v8BLK4V6YeA==99cAcfddGFn64+AMvQprBg==3NppPCS8Z5V0hNktcFG2C/vTc1PjQb/iCWIyuk56qEM=; usl_rollout_id=b43a5835-aaed-4b4f-8c98-13635bd0450e; udi-fingerprint=zSDj63pEDCysay7nLZ9SKqj6A+NFKxwCMhGdOTxrjuiWP/MAXxZHl9S48k/dwvsHCsM8c9mv4xX9WAuRW+jqvg==xOcAvb7JITrechca1v77U0IeTDHPmZKg/jypkF9fOJ8=; sid=QA.CAESEGtVD8OleEHfqO9S8KcljVcY1ZjEqAYiATEqJDAyNjNlZjg0LWVjY2YtNGI0YS04YjZmLWUyOGMxOTAyOTAwMjI81HG5m4bKLY81Ww2uOXCN0xLRDOh3IzTP_prxlkx7oK58Wg5NH-5ehIajBSsR7XpZkClBoWnOs8cVhtt1OgExQgh1YmVyLmNvbQ.RB-0mVNW1UCCv29xYiOW5O7WxBXbXRD8aLB0vDPoig8; csid=1.1695616085309.seIoMuhRPYWPtTtARnjEmVTtuwDfZqpAkq9FXr20vZs=; _cc=ActnoDLHXttro17Qyl0vzj%2Bm; _cid_cc=ActnoDLHXttro17Qyl0vzj%2Bm; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlc3Npb25fdHlwZSI6ImRlc2t0b3Bfc2Vzc2lvbiIsInRlbmFuY3kiOiJ1YmVyL3Byb2R1Y3Rpb24ifSwiaWF0IjoxNjk0NTQzMjgyLCJleHAiOjE2OTQ2Mjk2ODJ9.vXPoXCCIF9FFFyCgcf2WbYSoM-iuFDTtUx0dintVAJk; mp_adec770be288b16d9008c964acfba5c2_mixpanel=%7B%22distinct_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%2C%22%24device_id%22%3A%20%2218a2ff76ef31e-038f7cbf04a28b-d525429-1fa400-18a2ff76ef431e%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fwww.google.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22www.google.com%22%2C%22%24user_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%7D; marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ3MTY3NTIsImV4cCI6MTY5NDgwMzE1Mn0.9ua40PGlTuH5kz7T4dGtvRmwNoutR1VR-ftdoSItexs");
-
+                //httpClient.DefaultRequestHeaders.Add("Cookie", " marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; UBER_CONSENTMGR=1694543244351|consent:true; udi-id=EwxgbpsNPuhj/0Ms+R6RGBRjcq1RErUD321Q2mvjwmISQWHKJ3HyGzCx4YcZ0WXQmzUFw0i6L3hXvCn4DwFboWD9A7UWabcj6OaowvP80+lRgy5zp9vBOucrstgoUeqaUxu9GLOnNfTEXwYUrlv6nYXr77XTO4D7GsRhGaZh+/nW9IdYeruUKb+DQOmsHA5CRF/zBxsGRC7v8BLK4V6YeA==99cAcfddGFn64+AMvQprBg==3NppPCS8Z5V0hNktcFG2C/vTc1PjQb/iCWIyuk56qEM=; usl_rollout_id=b43a5835-aaed-4b4f-8c98-13635bd0450e; udi-fingerprint=zSDj63pEDCysay7nLZ9SKqj6A+NFKxwCMhGdOTxrjuiWP/MAXxZHl9S48k/dwvsHCsM8c9mv4xX9WAuRW+jqvg==xOcAvb7JITrechca1v77U0IeTDHPmZKg/jypkF9fOJ8=; sid=QA.CAESEGtVD8OleEHfqO9S8KcljVcY1ZjEqAYiATEqJDAyNjNlZjg0LWVjY2YtNGI0YS04YjZmLWUyOGMxOTAyOTAwMjI81HG5m4bKLY81Ww2uOXCN0xLRDOh3IzTP_prxlkx7oK58Wg5NH-5ehIajBSsR7XpZkClBoWnOs8cVhtt1OgExQgh1YmVyLmNvbQ.RB-0mVNW1UCCv29xYiOW5O7WxBXbXRD8aLB0vDPoig8; csid=1.1695616085309.seIoMuhRPYWPtTtARnjEmVTtuwDfZqpAkq9FXr20vZs=; _cc=ActnoDLHXttro17Qyl0vzj%2Bm; _cid_cc=ActnoDLHXttro17Qyl0vzj%2Bm; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlc3Npb25fdHlwZSI6ImRlc2t0b3Bfc2Vzc2lvbiIsInRlbmFuY3kiOiJ1YmVyL3Byb2R1Y3Rpb24ifSwiaWF0IjoxNjk0NTQzMjgyLCJleHAiOjE2OTQ2Mjk2ODJ9.vXPoXCCIF9FFFyCgcf2WbYSoM-iuFDTtUx0dintVAJk; mp_adec770be288b16d9008c964acfba5c2_mixpanel=%7B%22distinct_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%2C%22%24device_id%22%3A%20%2218a2ff76ef31e-038f7cbf04a28b-d525429-1fa400-18a2ff76ef431e%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fwww.google.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22www.google.com%22%2C%22%24user_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%7D; marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ3MTY3NTIsImV4cCI6MTY5NDgwMzE1Mn0.9ua40PGlTuH5kz7T4dGtvRmwNoutR1VR-ftdoSItexs");
+                httpClient.DefaultRequestHeaders.Add("Cookie", helper.GetConfiguration("UberSession"));
                 // Make an HTTP POST request to a URL
                 string url = "https://m.uber.com/graphql";
                 string requestBody = helper.GiveBodyforGettingFares(journeyCoOrdinates);
@@ -213,43 +214,41 @@ namespace PlanMyDayApp.Controllers
             return Ok();
         }
 
-        // get rides from lyft
         [HttpPost]
-        [Route("getFaresFromLyft")]
-        public async Task<IActionResult> GetFareFromLyft(JourneyCoOrdinates journeyCoOrdinates)
+        [Route("getMyCurrentLocation")]
+        public async Task<IActionResult> GetCurrentLocation(CoOrdinates coord)
         {
             using (HttpClient httpClient = new HttpClient())
             {
                 // General Headers
-                //httpClient.DefaultRequestHeaders.Date = DateTimeOffset.UtcNow;
+                httpClient.DefaultRequestHeaders.Date = DateTimeOffset.UtcNow;
 
                 // Request Headers
                 httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
-                httpClient.DefaultRequestHeaders.Host = "ride.lyft.com";
-                httpClient.DefaultRequestHeaders.Add("Referer", "https://ride.lyft.com/ridetype?origin=38.877548%2C-94.609733&destination=39.295503%2C-94.720197");
+                httpClient.DefaultRequestHeaders.Host = "www.uber.com";
+                httpClient.DefaultRequestHeaders.Add("Referer", "https://www.uber.com/");
 
                 // Representation Headers (Request)
-                //httpClient.DefaultRequestHeaders.Add("Accept-Encoding", " gzip, deflate, br");
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
                 httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.5");
-                //httpClient.DefaultRequestHeaders.Add("x-csrf-token", "x");
-                httpClient.DefaultRequestHeaders.Add("TE", " trailers");
+                httpClient.DefaultRequestHeaders.Add("x-csrf-token", "x");
 
                 // Other Headers
                 //httpClient.DefaultRequestHeaders.Add("Content-Length", "67");
-                httpClient.DefaultRequestHeaders.Add("x-locale-language", "en-US");
-                httpClient.DefaultRequestHeaders.Add("x-device-density", "1");
-                httpClient.DefaultRequestHeaders.Add("Origin", "https://ride.lyft.com");
+                httpClient.DefaultRequestHeaders.Add("Origin", "https://www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Alt-Used", "www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                //httpClient.DefaultRequestHeaders.Add("Cookie", "Add your cookie values here");
                 httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
                 httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
-                //httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
-                httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
 
                 //authentication key
-                httpClient.DefaultRequestHeaders.Add("Cookie", "sessId=882c978c-3957-400e-8e45-be617f7879deL1694883087; _gcl_au=1.1.1781142547.1694883090; _gid=GA1.2.313184714.1694883092; _scid=314078a8-a841-44a4-ac03-b7626d4c6b92; _tt_enable_cookie=1; _ttp=7f7jMFpHuLeoDjmUgznVMWM8E2X; _fbp=fb.1.1694883092251.1941903886; _sctr=1%7C1694840400000; stickyLyftBrowserId=0dQxoSpsWiI9iDh3RQGYwCkh; OptanonConsent=isGpcEnabled=0&datestamp=Sat+Sep+16+2023+11%3A51%3A39+GMT-0500+(Central+Daylight+Time)&version=202211.2.0&isIABGlobal=false&hosts=&consentId=bce9380a-1802-4036-831e-6fd8f38b1151&interactionCount=1&landingPath=NotLandingPage&groups=C0001%3A1%2CC0003%3A1%2CC0002%3A1%2CC0004%3A1&AwaitingReconsent=false; _ga=GA1.2.889779823.1694883091; _scid_r=314078a8-a841-44a4-ac03-b7626d4c6b92; _uetsid=49b89b9054b111ee8af0c12891a6522b; _uetvid=49b9bbd054b111ee813bfdaf5dd005bc; lyftAccessToken=8Ao2CPIeHQ/Nk6OeB3xSfTVbzP5NQ1Spr95dQOM2p4P44vuzngexO4GxIz5Pwk9vZqhBU+SKFODrcyn1xSu6EUvSSUShnS8zhLwP5Kn6vCT8DJEa6YR+vlI=; _ga_LQ1KHS36LD=GS1.1.1694883099.1.1.1694883163.60.0.0; __stripe_mid=fc606ec4-d233-4939-aa5a-ea29e83b70ceac292d; __stripe_sid=2877c900-a8c7-4e9b-bde6-4b16bba56180f034ca; _gat=1");
-
+                //httpClient.DefaultRequestHeaders.Add("Cookie", " marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; UBER_CONSENTMGR=1694543244351|consent:true; udi-id=EwxgbpsNPuhj/0Ms+R6RGBRjcq1RErUD321Q2mvjwmISQWHKJ3HyGzCx4YcZ0WXQmzUFw0i6L3hXvCn4DwFboWD9A7UWabcj6OaowvP80+lRgy5zp9vBOucrstgoUeqaUxu9GLOnNfTEXwYUrlv6nYXr77XTO4D7GsRhGaZh+/nW9IdYeruUKb+DQOmsHA5CRF/zBxsGRC7v8BLK4V6YeA==99cAcfddGFn64+AMvQprBg==3NppPCS8Z5V0hNktcFG2C/vTc1PjQb/iCWIyuk56qEM=; usl_rollout_id=b43a5835-aaed-4b4f-8c98-13635bd0450e; udi-fingerprint=zSDj63pEDCysay7nLZ9SKqj6A+NFKxwCMhGdOTxrjuiWP/MAXxZHl9S48k/dwvsHCsM8c9mv4xX9WAuRW+jqvg==xOcAvb7JITrechca1v77U0IeTDHPmZKg/jypkF9fOJ8=; sid=QA.CAESEGtVD8OleEHfqO9S8KcljVcY1ZjEqAYiATEqJDAyNjNlZjg0LWVjY2YtNGI0YS04YjZmLWUyOGMxOTAyOTAwMjI81HG5m4bKLY81Ww2uOXCN0xLRDOh3IzTP_prxlkx7oK58Wg5NH-5ehIajBSsR7XpZkClBoWnOs8cVhtt1OgExQgh1YmVyLmNvbQ.RB-0mVNW1UCCv29xYiOW5O7WxBXbXRD8aLB0vDPoig8; csid=1.1695616085309.seIoMuhRPYWPtTtARnjEmVTtuwDfZqpAkq9FXr20vZs=; _cc=ActnoDLHXttro17Qyl0vzj%2Bm; _cid_cc=ActnoDLHXttro17Qyl0vzj%2Bm; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlc3Npb25fdHlwZSI6ImRlc2t0b3Bfc2Vzc2lvbiIsInRlbmFuY3kiOiJ1YmVyL3Byb2R1Y3Rpb24ifSwiaWF0IjoxNjk0NTQzMjgyLCJleHAiOjE2OTQ2Mjk2ODJ9.vXPoXCCIF9FFFyCgcf2WbYSoM-iuFDTtUx0dintVAJk; mp_adec770be288b16d9008c964acfba5c2_mixpanel=%7B%22distinct_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%2C%22%24device_id%22%3A%20%2218a2ff76ef31e-038f7cbf04a28b-d525429-1fa400-18a2ff76ef431e%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fwww.google.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22www.google.com%22%2C%22%24user_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%7D; marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ3MTY3NTIsImV4cCI6MTY5NDgwMzE1Mn0.9ua40PGlTuH5kz7T4dGtvRmwNoutR1VR-ftdoSItexs");
+                httpClient.DefaultRequestHeaders.Add("Cookie", helper.GetConfiguration("UberLocationKey"));
                 // Make an HTTP POST request to a URL
-                string url = "https://ride.lyft.com/v1/offerings";
-                string requestBody = helper.GiveBodyForGettingFaresFromLyft(journeyCoOrdinates);
+                string url = "https://www.uber.com/api/loadTSCurrentLocation?localeCode=en";
+                string requestBody = helper.GiveBodyForUberCurrentLocation(coord);
 
 
                 // adding content to the request
@@ -260,9 +259,9 @@ namespace PlanMyDayApp.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonResponse = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine("Got Fares...........");
+                    Console.WriteLine("Got Current Location...........");
                     Console.WriteLine(jsonResponse);
-                    Console.WriteLine("Got Fares............");
+                    Console.WriteLine("Got Current Fares............");
 
                     return Ok(jsonResponse);
                 }
@@ -271,9 +270,218 @@ namespace PlanMyDayApp.Controllers
                     Console.WriteLine($"HTTP Error: {response.StatusCode}");
                 }
             }
-            //helper.MappingSelectedAddress(session, type, selectAddress);
-            //Console.WriteLine(session);
             return Ok();
         }
+
+        [HttpPost]
+        [Route("getMeNearByAirport")]
+        public async Task<IEnumerable<ResponseWithIDandAddress>> GetMeNearByAirport(CoOrdinates coord)
+        {
+            AddressResponseModel address;
+            ResponseWithIDandAddress[] arr = new ResponseWithIDandAddress[2];
+            using (HttpClient httpClient = new HttpClient())
+            {
+                // General Headers
+                httpClient.DefaultRequestHeaders.Date = DateTimeOffset.UtcNow;
+
+                // Request Headers
+                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
+                httpClient.DefaultRequestHeaders.Host = "www.uber.com";
+                httpClient.DefaultRequestHeaders.Add("Referer", "https://www.uber.com/");
+
+                // Representation Headers (Request)
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+                httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.5");
+                httpClient.DefaultRequestHeaders.Add("x-csrf-token", "x");
+
+                // Other Headers
+                //httpClient.DefaultRequestHeaders.Add("Content-Length", "67");
+                httpClient.DefaultRequestHeaders.Add("Origin", "https://www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Alt-Used", "www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                //httpClient.DefaultRequestHeaders.Add("Cookie", "Add your cookie values here");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
+
+                //authentication key
+                //httpClient.DefaultRequestHeaders.Add("Cookie", " marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; UBER_CONSENTMGR=1694543244351|consent:true; udi-id=EwxgbpsNPuhj/0Ms+R6RGBRjcq1RErUD321Q2mvjwmISQWHKJ3HyGzCx4YcZ0WXQmzUFw0i6L3hXvCn4DwFboWD9A7UWabcj6OaowvP80+lRgy5zp9vBOucrstgoUeqaUxu9GLOnNfTEXwYUrlv6nYXr77XTO4D7GsRhGaZh+/nW9IdYeruUKb+DQOmsHA5CRF/zBxsGRC7v8BLK4V6YeA==99cAcfddGFn64+AMvQprBg==3NppPCS8Z5V0hNktcFG2C/vTc1PjQb/iCWIyuk56qEM=; usl_rollout_id=b43a5835-aaed-4b4f-8c98-13635bd0450e; udi-fingerprint=zSDj63pEDCysay7nLZ9SKqj6A+NFKxwCMhGdOTxrjuiWP/MAXxZHl9S48k/dwvsHCsM8c9mv4xX9WAuRW+jqvg==xOcAvb7JITrechca1v77U0IeTDHPmZKg/jypkF9fOJ8=; sid=QA.CAESEGtVD8OleEHfqO9S8KcljVcY1ZjEqAYiATEqJDAyNjNlZjg0LWVjY2YtNGI0YS04YjZmLWUyOGMxOTAyOTAwMjI81HG5m4bKLY81Ww2uOXCN0xLRDOh3IzTP_prxlkx7oK58Wg5NH-5ehIajBSsR7XpZkClBoWnOs8cVhtt1OgExQgh1YmVyLmNvbQ.RB-0mVNW1UCCv29xYiOW5O7WxBXbXRD8aLB0vDPoig8; csid=1.1695616085309.seIoMuhRPYWPtTtARnjEmVTtuwDfZqpAkq9FXr20vZs=; _cc=ActnoDLHXttro17Qyl0vzj%2Bm; _cid_cc=ActnoDLHXttro17Qyl0vzj%2Bm; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlc3Npb25fdHlwZSI6ImRlc2t0b3Bfc2Vzc2lvbiIsInRlbmFuY3kiOiJ1YmVyL3Byb2R1Y3Rpb24ifSwiaWF0IjoxNjk0NTQzMjgyLCJleHAiOjE2OTQ2Mjk2ODJ9.vXPoXCCIF9FFFyCgcf2WbYSoM-iuFDTtUx0dintVAJk; mp_adec770be288b16d9008c964acfba5c2_mixpanel=%7B%22distinct_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%2C%22%24device_id%22%3A%20%2218a2ff76ef31e-038f7cbf04a28b-d525429-1fa400-18a2ff76ef431e%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fwww.google.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22www.google.com%22%2C%22%24user_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%7D; marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ3MTY3NTIsImV4cCI6MTY5NDgwMzE1Mn0.9ua40PGlTuH5kz7T4dGtvRmwNoutR1VR-ftdoSItexs");
+                httpClient.DefaultRequestHeaders.Add("Cookie", helper.GetConfiguration("UberAirport"));
+                // Make an HTTP POST request to a URL
+                string url = "https://www.uber.com/api/loadTSSuggestions?localeCode=en";
+                string requestBody = helper.GiveMeBodyForNearByAirports(coord);
+
+
+                // adding content to the request
+                HttpContent requestContent = new StringContent(requestBody, null, "application/json");
+                requestContent.Headers.ContentLength = requestBody.Length;
+                HttpResponseMessage response = await httpClient.PostAsync(url, requestContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Got Airport Location...........");
+                    Console.WriteLine(jsonResponse);
+                    Console.WriteLine("Got Airport Fares............");
+                    address = new AddressResponseModel();
+                    address = JsonConvert.DeserializeObject<AddressResponseModel>(jsonResponse);
+                    arr = new ResponseWithIDandAddress[address.data.candidates.Count];
+
+                    for (int i = 0; i < address.data.candidates.Count; i++)
+                    {
+                        arr[i] = new ResponseWithIDandAddress(address.data.candidates[i].id, address.data.candidates[i].addressLine1 + address.data.candidates[i].addressLine2);
+                        Console.WriteLine(JsonConvert.SerializeObject(arr[i]));
+                    }
+
+                    return arr;
+                }
+                else
+                {
+                    Console.WriteLine($"HTTP Error: {response.StatusCode}");
+                }
+            }
+            return arr;
+        }
+
+        [HttpPost]
+        [Route("getMeNearByRestaurants")]
+        public async Task<IEnumerable<ResponseWithIDandAddress>> GetMeNearByRestaurants(CoOrdinates coord)
+        {
+            AddressResponseModel address;
+            ResponseWithIDandAddress[] arr = new ResponseWithIDandAddress[2];
+            using (HttpClient httpClient = new HttpClient())
+            {
+                // General Headers
+                httpClient.DefaultRequestHeaders.Date = DateTimeOffset.UtcNow;
+
+                // Request Headers
+                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
+                httpClient.DefaultRequestHeaders.Host = "www.uber.com";
+                httpClient.DefaultRequestHeaders.Add("Referer", "https://www.uber.com/");
+
+                // Representation Headers (Request)
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+                httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.5");
+                httpClient.DefaultRequestHeaders.Add("x-csrf-token", "x");
+
+                // Other Headers
+                //httpClient.DefaultRequestHeaders.Add("Content-Length", "67");
+                httpClient.DefaultRequestHeaders.Add("Origin", "https://www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Alt-Used", "www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                //httpClient.DefaultRequestHeaders.Add("Cookie", "Add your cookie values here");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
+
+                //authentication key
+                //httpClient.DefaultRequestHeaders.Add("Cookie", " marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; UBER_CONSENTMGR=1694543244351|consent:true; udi-id=EwxgbpsNPuhj/0Ms+R6RGBRjcq1RErUD321Q2mvjwmISQWHKJ3HyGzCx4YcZ0WXQmzUFw0i6L3hXvCn4DwFboWD9A7UWabcj6OaowvP80+lRgy5zp9vBOucrstgoUeqaUxu9GLOnNfTEXwYUrlv6nYXr77XTO4D7GsRhGaZh+/nW9IdYeruUKb+DQOmsHA5CRF/zBxsGRC7v8BLK4V6YeA==99cAcfddGFn64+AMvQprBg==3NppPCS8Z5V0hNktcFG2C/vTc1PjQb/iCWIyuk56qEM=; usl_rollout_id=b43a5835-aaed-4b4f-8c98-13635bd0450e; udi-fingerprint=zSDj63pEDCysay7nLZ9SKqj6A+NFKxwCMhGdOTxrjuiWP/MAXxZHl9S48k/dwvsHCsM8c9mv4xX9WAuRW+jqvg==xOcAvb7JITrechca1v77U0IeTDHPmZKg/jypkF9fOJ8=; sid=QA.CAESEGtVD8OleEHfqO9S8KcljVcY1ZjEqAYiATEqJDAyNjNlZjg0LWVjY2YtNGI0YS04YjZmLWUyOGMxOTAyOTAwMjI81HG5m4bKLY81Ww2uOXCN0xLRDOh3IzTP_prxlkx7oK58Wg5NH-5ehIajBSsR7XpZkClBoWnOs8cVhtt1OgExQgh1YmVyLmNvbQ.RB-0mVNW1UCCv29xYiOW5O7WxBXbXRD8aLB0vDPoig8; csid=1.1695616085309.seIoMuhRPYWPtTtARnjEmVTtuwDfZqpAkq9FXr20vZs=; _cc=ActnoDLHXttro17Qyl0vzj%2Bm; _cid_cc=ActnoDLHXttro17Qyl0vzj%2Bm; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlc3Npb25fdHlwZSI6ImRlc2t0b3Bfc2Vzc2lvbiIsInRlbmFuY3kiOiJ1YmVyL3Byb2R1Y3Rpb24ifSwiaWF0IjoxNjk0NTQzMjgyLCJleHAiOjE2OTQ2Mjk2ODJ9.vXPoXCCIF9FFFyCgcf2WbYSoM-iuFDTtUx0dintVAJk; mp_adec770be288b16d9008c964acfba5c2_mixpanel=%7B%22distinct_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%2C%22%24device_id%22%3A%20%2218a2ff76ef31e-038f7cbf04a28b-d525429-1fa400-18a2ff76ef431e%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fwww.google.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22www.google.com%22%2C%22%24user_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%7D; marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ3MTY3NTIsImV4cCI6MTY5NDgwMzE1Mn0.9ua40PGlTuH5kz7T4dGtvRmwNoutR1VR-ftdoSItexs");
+                httpClient.DefaultRequestHeaders.Add("Cookie", helper.GetConfiguration("UberAirport"));
+                // Make an HTTP POST request to a URL
+                string url = "https://www.uber.com/api/loadTSSuggestions?localeCode=en";
+                string requestBody = helper.GiveMeBodyForNearByRestaurants(coord);
+
+
+                // adding content to the request
+                HttpContent requestContent = new StringContent(requestBody, null, "application/json");
+                requestContent.Headers.ContentLength = requestBody.Length;
+                HttpResponseMessage response = await httpClient.PostAsync(url, requestContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Got Restaurants Location...........");
+                    Console.WriteLine(jsonResponse);
+                    Console.WriteLine("Got Restaurants Fares............");
+                    address = new AddressResponseModel();
+                    address = JsonConvert.DeserializeObject<AddressResponseModel>(jsonResponse);
+                    arr = new ResponseWithIDandAddress[address.data.candidates.Count];
+
+                    for (int i = 0; i < address.data.candidates.Count; i++)
+                    {
+                        arr[i] = new ResponseWithIDandAddress(address.data.candidates[i].id, address.data.candidates[i].addressLine1 + address.data.candidates[i].addressLine2);
+                        Console.WriteLine(JsonConvert.SerializeObject(arr[i]));
+                    }
+
+                    return arr;
+                }
+                else
+                {
+                    Console.WriteLine($"HTTP Error: {response.StatusCode}");
+                }
+            }
+            return arr;
+        }
+
+        [HttpPost]
+        [Route("getMeNearByMCDonalds")]
+        public async Task<IEnumerable<ResponseWithIDandAddress>> GetMeNearByMCDonalds(CoOrdinates coord)
+        {
+            AddressResponseModel address;
+            ResponseWithIDandAddress[] arr = new ResponseWithIDandAddress[2];
+            using (HttpClient httpClient = new HttpClient())
+            {
+                // General Headers
+                httpClient.DefaultRequestHeaders.Date = DateTimeOffset.UtcNow;
+
+                // Request Headers
+                httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/118.0");
+                httpClient.DefaultRequestHeaders.Host = "www.uber.com";
+                httpClient.DefaultRequestHeaders.Add("Referer", "https://www.uber.com/");
+
+                // Representation Headers (Request)
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+                httpClient.DefaultRequestHeaders.AcceptLanguage.ParseAdd("en-US,en;q=0.5");
+                httpClient.DefaultRequestHeaders.Add("x-csrf-token", "x");
+
+                // Other Headers
+                //httpClient.DefaultRequestHeaders.Add("Content-Length", "67");
+                httpClient.DefaultRequestHeaders.Add("Origin", "https://www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Alt-Used", "www.uber.com");
+                httpClient.DefaultRequestHeaders.Add("Connection", "keep-alive");
+                //httpClient.DefaultRequestHeaders.Add("Cookie", "Add your cookie values here");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Dest", "empty");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
+                httpClient.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
+
+                //authentication key
+                //httpClient.DefaultRequestHeaders.Add("Cookie", " marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; UBER_CONSENTMGR=1694543244351|consent:true; udi-id=EwxgbpsNPuhj/0Ms+R6RGBRjcq1RErUD321Q2mvjwmISQWHKJ3HyGzCx4YcZ0WXQmzUFw0i6L3hXvCn4DwFboWD9A7UWabcj6OaowvP80+lRgy5zp9vBOucrstgoUeqaUxu9GLOnNfTEXwYUrlv6nYXr77XTO4D7GsRhGaZh+/nW9IdYeruUKb+DQOmsHA5CRF/zBxsGRC7v8BLK4V6YeA==99cAcfddGFn64+AMvQprBg==3NppPCS8Z5V0hNktcFG2C/vTc1PjQb/iCWIyuk56qEM=; usl_rollout_id=b43a5835-aaed-4b4f-8c98-13635bd0450e; udi-fingerprint=zSDj63pEDCysay7nLZ9SKqj6A+NFKxwCMhGdOTxrjuiWP/MAXxZHl9S48k/dwvsHCsM8c9mv4xX9WAuRW+jqvg==xOcAvb7JITrechca1v77U0IeTDHPmZKg/jypkF9fOJ8=; sid=QA.CAESEGtVD8OleEHfqO9S8KcljVcY1ZjEqAYiATEqJDAyNjNlZjg0LWVjY2YtNGI0YS04YjZmLWUyOGMxOTAyOTAwMjI81HG5m4bKLY81Ww2uOXCN0xLRDOh3IzTP_prxlkx7oK58Wg5NH-5ehIajBSsR7XpZkClBoWnOs8cVhtt1OgExQgh1YmVyLmNvbQ.RB-0mVNW1UCCv29xYiOW5O7WxBXbXRD8aLB0vDPoig8; csid=1.1695616085309.seIoMuhRPYWPtTtARnjEmVTtuwDfZqpAkq9FXr20vZs=; _cc=ActnoDLHXttro17Qyl0vzj%2Bm; _cid_cc=ActnoDLHXttro17Qyl0vzj%2Bm; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlc3Npb25fdHlwZSI6ImRlc2t0b3Bfc2Vzc2lvbiIsInRlbmFuY3kiOiJ1YmVyL3Byb2R1Y3Rpb24ifSwiaWF0IjoxNjk0NTQzMjgyLCJleHAiOjE2OTQ2Mjk2ODJ9.vXPoXCCIF9FFFyCgcf2WbYSoM-iuFDTtUx0dintVAJk; mp_adec770be288b16d9008c964acfba5c2_mixpanel=%7B%22distinct_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%2C%22%24device_id%22%3A%20%2218a2ff76ef31e-038f7cbf04a28b-d525429-1fa400-18a2ff76ef431e%22%2C%22%24search_engine%22%3A%20%22google%22%2C%22%24initial_referrer%22%3A%20%22https%3A%2F%2Fwww.google.com%2F%22%2C%22%24initial_referring_domain%22%3A%20%22www.google.com%22%2C%22%24user_id%22%3A%20%220263ef84-eccf-4b4a-8b6f-e28c19029002%22%7D; marketing_vistor_id=7b2fc193-2f87-4331-9f60-62dc06551335; _ua={\"session_id\":\"a589d976-b6c3-463e-b794-cf8401e44ac2\",\"session_time_ms\":1694543282004}; jwt-session=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTQ3MTY3NTIsImV4cCI6MTY5NDgwMzE1Mn0.9ua40PGlTuH5kz7T4dGtvRmwNoutR1VR-ftdoSItexs");
+                httpClient.DefaultRequestHeaders.Add("Cookie", helper.GetConfiguration("UberAirport"));
+                // Make an HTTP POST request to a URL
+                string url = "https://www.uber.com/api/loadTSSuggestions?localeCode=en";
+                string requestBody = helper.GiveMeBodyForNearByMCDonalds(coord);
+
+
+                // adding content to the request
+                HttpContent requestContent = new StringContent(requestBody, null, "application/json");
+                requestContent.Headers.ContentLength = requestBody.Length;
+                HttpResponseMessage response = await httpClient.PostAsync(url, requestContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    Console.WriteLine("Got MCDonalds Location...........");
+                    Console.WriteLine(jsonResponse);
+                    Console.WriteLine("Got MCDonalds Fares............");
+                    address = new AddressResponseModel();
+                    address = JsonConvert.DeserializeObject<AddressResponseModel>(jsonResponse);
+                    arr = new ResponseWithIDandAddress[address.data.candidates.Count];
+
+                    for (int i = 0; i < address.data.candidates.Count; i++)
+                    {
+                        arr[i] = new ResponseWithIDandAddress(address.data.candidates[i].id, address.data.candidates[i].addressLine1 + address.data.candidates[i].addressLine2);
+                        Console.WriteLine(JsonConvert.SerializeObject(arr[i]));
+                    }
+
+                    return arr;
+                }
+                else
+                {
+                    Console.WriteLine($"HTTP Error: {response.StatusCode}");
+                }
+            }
+            return arr;
+        }
+
     }
 }

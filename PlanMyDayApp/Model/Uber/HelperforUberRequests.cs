@@ -36,6 +36,43 @@ namespace PlanMyDayApp.Model.Uber
             return result;
         }
 
+        //Give me body for Near By airports
+        public string GiveMeBodyForNearByAirports(CoOrdinates co)
+        {
+            return "{\"q\":\"Airp\",\"type\":\"destination\",\"locale\":\"en\",\"lat\":"+ co.latitude.ToString("0.00") + ",\"long\":" + co.longitude.ToString("0.00") + "}";
+        }
+
+        // give me body for nearest restaurnt
+        public string GiveMeBodyForNearByRestaurants(CoOrdinates co)
+        {
+            return "{\"q\":\"Restau\",\"type\":\"destination\",\"locale\":\"en\",\"lat\":" + co.latitude.ToString("0.00") + ",\"long\":" + co.longitude.ToString("0.00") + "}";
+        }
+
+        // give me body for nearest MCDonalds
+        public string GiveMeBodyForNearByMCDonalds(CoOrdinates co)
+        {
+            return "{\"q\":\"MCDona\",\"type\":\"destination\",\"locale\":\"en\",\"lat\":" + co.latitude.ToString("0.00") + ",\"long\":" + co.longitude.ToString("0.00") + "}";
+        }
+
+        public string GetConfiguration(string requestFor)
+        {
+            IConfiguration configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                                        .AddJsonFile("appsettings.json").Build();
+            //Console.WriteLine("........................");
+            //Console.WriteLine(configuration["SessionKeys:" + requestFor]);
+            //Console.WriteLine("........................");  
+            return configuration["SessionKeys:"+ requestFor];
+
+        }
+
+        //give body for getting current location from uber
+        public string GiveBodyForUberCurrentLocation(CoOrdinates co)
+        {
+            string result = "{\"lat\":" + co.latitude + ",\"lng\":" + co.longitude + ",\"lang\":\"en\"}";
+            Console.WriteLine(result);
+            return result;
+        }
+
         //give body for getting fares for Lyft
         public string GiveBodyForGettingFaresFromLyft(JourneyCoOrdinates journeyCoOrdinates)
         {
@@ -57,6 +94,8 @@ namespace PlanMyDayApp.Model.Uber
             Console.WriteLine(body);
             return body;
         }
+
+        //give body for getting current location from uber
 
         //mapping selected address into the session object
         //public void MappingSelectedAddress(UberSession session, string type, string address)
@@ -119,5 +158,6 @@ namespace PlanMyDayApp.Model.Uber
             }
             //return new HttpClient();
         }
+
     }
 }

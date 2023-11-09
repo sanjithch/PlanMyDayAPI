@@ -46,5 +46,12 @@
         public int latitude_e6 { get; set; }
         public int longitude_e6 { get;set; }
     }
+
+    public class FlyDetails
+    {
+        public DateTime date { get; set; }
+        public string? FromCode { get; set; }
+        public string? ToCode { get; set; }
+    }
 }
 
