@@ -47,11 +47,11 @@
         public int longitude_e6 { get;set; }
     }
 
-    public class FlyDetails
+    public class RequestForFlightDetails
     {
-        public DateTime date { get; set; }
-        public string? FromCode { get; set; }
-        public string? ToCode { get; set; }
+        public string? date { get; set; }
+        public string? From { get; set; }
+        public string? To { get; set; }
     }
 }
 

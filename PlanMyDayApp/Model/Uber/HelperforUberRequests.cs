@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Net;
 using PlanMyDayApp.Model.Uber.GettingAddress;
 using Newtonsoft.Json;
+using System;
 
 namespace PlanMyDayApp.Model.Uber
 {
@@ -45,12 +46,16 @@ namespace PlanMyDayApp.Model.Uber
         // give me body for nearest restaurnt
         public string GiveMeBodyForNearByRestaurants(CoOrdinates co)
         {
+            Console.WriteLine(".........................................body...........................");
+            Console.WriteLine("{\"q\":\"Restau\",\"type\":\"destination\",\"locale\":\"en\",\"lat\":" + co.latitude.ToString("0.00") + ",\"long\":" + co.longitude.ToString("0.00") + "}");
             return "{\"q\":\"Restau\",\"type\":\"destination\",\"locale\":\"en\",\"lat\":" + co.latitude.ToString("0.00") + ",\"long\":" + co.longitude.ToString("0.00") + "}";
         }
 
         // give me body for nearest MCDonalds
         public string GiveMeBodyForNearByMCDonalds(CoOrdinates co)
         {
+            Console.WriteLine(".........................................body...........................");
+            Console.WriteLine("{\"q\":\"Restau\",\"type\":\"destination\",\"locale\":\"en\",\"lat\":" + co.latitude.ToString("0.00") + ",\"long\":" + co.longitude.ToString("0.00") + "}");
             return "{\"q\":\"MCDona\",\"type\":\"destination\",\"locale\":\"en\",\"lat\":" + co.latitude.ToString("0.00") + ",\"long\":" + co.longitude.ToString("0.00") + "}";
         }
 
